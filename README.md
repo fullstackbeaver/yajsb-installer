@@ -21,7 +21,8 @@ This project is a Yasb installer, which uses Bun to manage dependencies and scri
 To use the installer, run the following command:
 
 ```bash
-node installer.ts
+wget https://raw.githubusercontent.com/fullstackbeaver/yasb-installer/refs/heads/main/installer.js
+bun installer.js
 ```
 
 It's a little weird because YASB is not published yet and also this installer
