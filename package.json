@@ -1,5 +1,5 @@
 {
-  "name": "yasb-installer",
+  "name": "yajsb-installer",
   "private": true,
   "devDependencies": {
     "@types/bun": "latest"

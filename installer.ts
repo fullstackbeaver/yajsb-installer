@@ -47,7 +47,7 @@ function readInput(prompt: string): Promise<string> {
   });
 }
 
-async function installYasb() {
+async function installYajsb() {
   try {
     // Instancie un projet Bun
     await runCommand(
@@ -58,7 +58,7 @@ async function installYasb() {
     // Installe la dépendance yasb
     await runCommand(
       'bun add github:fullstackbeaver/yajsb',
-      "📦 Installing yasb..."
+      "📦 Installing Yajsb..."
     );
 
     // add scripts in package.json
@@ -118,4 +118,4 @@ async function installYasb() {
   }
 }
 
-installYasb();
+installYajsb();

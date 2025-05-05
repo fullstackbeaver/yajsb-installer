@@ -1,7 +1,7 @@
-# Yasb Installer
+# Yajsb Installer
 ================
 
-This project allows to start quickly a YASB project
+This project allows to start quickly a Yajsb project
 
 ## Table of Contents
 -----------------
@@ -13,7 +13,7 @@ This project allows to start quickly a YASB project
 ## Getting Started
 ---------------
 
-This project is a Yasb installer, which uses Bun to manage dependencies and scripts.
+This project is a Yajsb installer, which uses Bun to manage dependencies and scripts.
 
 ## Usage
 -----
@@ -21,11 +21,11 @@ This project is a Yasb installer, which uses Bun to manage dependencies and scri
 To use the installer, run the following command in the folder you want to create your new project:
 
 ```bash
-wget --no-cache https://raw.githubusercontent.com/fullstackbeaver/yasb-installer/refs/heads/main/installer.js
+wget --no-cache https://raw.githubusercontent.com/fullstackbeaver/yajsb-installer/refs/heads/main/installer.js
 bun installer.js
 ```
 
-It's a little weird because YASB is not published yet and also this installer
+It's a little weird because YAjSB is not published yet and also this installer
 
 ## Scripts
 --------
