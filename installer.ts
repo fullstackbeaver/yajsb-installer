@@ -104,6 +104,12 @@ async function installYasb() {
         "📦 Creating site folder..."
       )
     }
+
+    // remove installer
+    await runCommand(
+      "rm ./installer.js",
+      "📦 Removing installer..."
+    )
     process.exit(0);
 
   } catch (error) {
