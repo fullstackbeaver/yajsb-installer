@@ -9,7 +9,6 @@ const mvCmd        = os.platform().startsWith("win") ? "move" : "mv";
 async function runCommand(cmd: string, msg:string) {
   try {
     console.log(msg);
-    console.log(cmd);
     const bunProcess = Bun.spawn(cmd.split(' '), {
       stdout: 'pipe',
       stderr: 'pipe',
@@ -24,11 +23,11 @@ async function runCommand(cmd: string, msg:string) {
       console.error(`stdout: ${stdout}`);
       console.error(`stderr: ${stderr}`);
       process.exit(1);
-    } else {
+    } /*else {
       console.log(`${GREEN}✔ Command succeeded: ${cmd}${NO_COLOR}`);
       if (stdout.trim()) console.log(stdout.trim());
       if (stderr.trim()) console.log(stderr.trim());
-    }
+    }*/
   } catch (error) {
     console.error('🚨 Erreur critique:', error);
     process.exit(1);
@@ -107,6 +106,7 @@ async function installYasb() {
         "📦 Creating site folder..."
       )
     }
+    process.exit(0);
 
   } catch (error) {
     console.error('🚨 Fatal error:', error);
