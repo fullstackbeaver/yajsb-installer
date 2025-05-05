@@ -18,10 +18,10 @@ This project is a Yasb installer, which uses Bun to manage dependencies and scri
 ## Usage
 -----
 
-To use the installer, run the following command:
+To use the installer, run the following command in the folder you want to create your new project:
 
 ```bash
-wget https://raw.githubusercontent.com/fullstackbeaver/yasb-installer/refs/heads/main/installer.js
+wget --no-cache https://raw.githubusercontent.com/fullstackbeaver/yasb-installer/refs/heads/main/installer.js
 bun installer.js
 ```
 

@@ -5,7 +5,6 @@ const NO_COLOR     = '\x1b[0m';
 const moduleFolder = "./node_modules/yajsb/lib";
 const mvCmd        = os.platform().startsWith("win") ? "move" : "mv";
 
-
 async function runCommand(cmd: string, msg:string) {
   try {
     console.log(msg);
@@ -85,11 +84,10 @@ async function installYasb() {
 
     // install demo site
     console.log(`${GREEN}Do you need a demo site?${NO_COLOR}`);
-    console.log("(1) yes");
-    console.log("(2) no");
-    const rawChoice = await readInput("Select an option (default is 1): ");
-    let choice = rawChoice === "" ? 1 : parseInt(rawChoice);
-    if (choice > 2 || choice < 1) choice = 1;
+    console.log("(y) yes");
+    console.log("(n) no");
+    const rawChoice = await readInput("Select an option (default is yes):");
+    const choice    = rawChoice === 'n' ? 2 : 1;
     if ( choice === 1 ) {
       await runCommand(
         'bun add github:fullstackbeaver/yajsb-site-demo -D',
