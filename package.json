@@ -1,0 +1,13 @@
+{
+  "name": "yasb-installer",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "scripts": {
+    "build": "bun build ./installer.ts --outdir ./ --minify --target bun --verbose"
+  }
+}
