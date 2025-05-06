@@ -1,4 +1,6 @@
-import os from 'os';
+import { mkdir, readdir, rename, stat } from 'fs/promises';
+import os                               from 'os';
+import path                             from 'path';
 
 const GREEN        = '\x1b[32m';
 const NO_COLOR     = '\x1b[0m';
@@ -10,7 +12,7 @@ async function runCommand(cmd: string, msg:string) {
     console.log(msg);
     const bunProcess = Bun.spawn(cmd.split(' '), {
       stdout: 'pipe',
-      stderr: 'pipe',
+      stderr: 'pipe'
     });
 
     const stdout = bunProcess.stdout ? await new Response(bunProcess.stdout).text() : '';
@@ -47,8 +49,24 @@ function readInput(prompt: string): Promise<string> {
   });
 }
 
+async function moveFolderContents(sourceDir: string, targetDir: string) {
+  await mkdir(targetDir, { recursive: true });
+  const items = await readdir(sourceDir);
+  for (const item of items) {
+    const from = path.join(sourceDir, item);
+    const to = path.join(targetDir, item);
+    const stats = await stat(from);
+    if (stats.isDirectory()) {
+      await moveFolderContents(from, to); // récursif
+    } else {
+      await rename(from, to);
+    }
+  }
+}
+
 async function installYajsb() {
   try {
+
     // Instancie un projet Bun
     await runCommand(
       "bun init",
@@ -83,27 +101,18 @@ async function installYajsb() {
     );
 
     // install demo site
+    await mkdir("./site", { recursive: true });
+
     console.log(`${GREEN}Do you need a demo site?${NO_COLOR}`);
     console.log("(y) yes");
     console.log("(n) no");
     const rawChoice = await readInput("Select an option (default is yes):");
-    const choice    = rawChoice === 'n' ? 2 : 1;
-    if ( choice === 1 ) {
-      await runCommand(
-        'bun add github:fullstackbeaver/yajsb-site-demo -D',
-        "📦 Installation of the sample site..."
-      );
-      await runCommand(
-        `${mvCmd} ./node_modules/yajsb-site-demo ./site`,
-        "📦 Moving sample site into project..."
-      );
-    }
-    else {
-      await runCommand(
-        `mkdir ./site`,
-        "📦 Creating site folder..."
-      )
-    }
+    const src       = rawChoice === 'n' ? "yajsb-empty-site" : "yajsb-site-demo";
+    await runCommand(
+      `bun add github:fullstackbeaver/${src} -D`,
+      "📦 Installation of the sample site or empty site..."
+    );
+    await moveFolderContents(`./node_modules/${src}`, './site');
 
     // remove installer
     await runCommand(
